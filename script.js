@@ -3,15 +3,23 @@ let numberOfSquares = 16;
 // initially the contianer will be a 16 x 16 grid
 const container = document.querySelector("#container");
 
-// creating the squares
-function createSquares(numberOfSqaures) {
+function createSquares(numberOfSquares) {
     const totalSquares = numberOfSquares * numberOfSquares;
     for (let i = 0; i < totalSquares; i++) {
         const newSquare = document.createElement("div");
         newSquare.classList.add("grid-square");
+        newSquare.style.backgroundColor = "rgba(255, 255, 255, 0.0)";
         // hovering effect
         newSquare.addEventListener('mouseenter', () => {
-            newSquare.style.backgroundColor = "red";
+            const newRed = Math.floor(Math.random() * 256);
+            const newGreen = Math.floor(Math.random() * 256);
+            const newBlue = Math.floor(Math.random() * 256);
+            // darken by 10% 
+            newAlpha = window.getComputedStyle(newSquare).getPropertyValue("background-color");
+            newAlpha = parseFloat(newAlpha.split(",")[3]);
+            if (newAlpha !== 1)
+                newAlpha += 0.1;
+            newSquare.style.backgroundColor = `rgba(${newRed}, ${newGreen}, ${newBlue}, ${newAlpha})`;
         })
         newSquare.style.flex = `0 0 calc(100% / ${numberOfSquares}`;
         newSquare.style.height = `calc(100% / ${numberOfSquares})`;
@@ -19,7 +27,7 @@ function createSquares(numberOfSqaures) {
     }
 }
 
-createSquares(numberOfSquares); 
+createSquares(numberOfSquares);
 
 // button handling
 const squaresBtn = document.querySelector("#sqInputBtn");
