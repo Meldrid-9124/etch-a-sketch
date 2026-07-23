@@ -1,17 +1,20 @@
-// initially, there will be 256 squares i.e a grid of 16x16 squares
-let numberOfSquares = 256;
+let numberOfSquares = 16;
 
+// initially the contianer will be a 16 x 16 grid
 const container = document.querySelector("#container");
 
 // creating the squares
 function createSquares(numberOfSqaures) {
-    for (let i = 0; i < numberOfSquares; i++) {
+    const totalSquares = numberOfSquares * numberOfSquares;
+    for (let i = 0; i < totalSquares; i++) {
         const newSquare = document.createElement("div");
         newSquare.classList.add("grid-square");
         // hovering effect
         newSquare.addEventListener('mouseenter', () => {
             newSquare.style.backgroundColor = "red";
         })
+        newSquare.style.flex = `0 0 calc(100% / ${numberOfSquares}`;
+        newSquare.style.height = `calc(100% / ${numberOfSquares})`;
         container.appendChild(newSquare);
     }
 }
